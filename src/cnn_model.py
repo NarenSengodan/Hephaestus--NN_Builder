@@ -12,4 +12,10 @@ def create_cnn(num_layers, activation_layers):
         
         model.add_module(f'activation{i}', activation_layers[i])
     
+    model.add_module(f'pool', nn.MaxPool2d(kernel_size=2, stride=2))
+    model.add_module(f'flatten', nn.Flatten())
+    model.add_module(f'fc', nn.Linear(32 * 14 * 14, 10))
+    model.add_module(f'softmax', nn.LogSoftmax(dim=1))
+    
+    
     return model
