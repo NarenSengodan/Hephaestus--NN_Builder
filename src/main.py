@@ -1,4 +1,3 @@
-# On Works#import torch
 import torch.nn as nn
 from cnn_model import create_cnn
 from rnn_model import create_rnn
