@@ -26,19 +26,13 @@ def import_dataset():
 
 def CNN_main():
 
-    x_train_tensor, x_test_tensor, x_train, x_test = import_dataset()
+    x_train, x_test = import_dataset()
 
     input_prompt = input("Do you want to obtain input size from dataset? (y/n): ")
     if input_prompt.lower() == "y":
         input_size = x_train.shape[1:]
     else:
         input_size = None
-
-    in_chan_prompt = input("Do you want to obtain number of in channels from dataset? (y/n): ")
-    if in_chan_prompt.lower() == "y":
-        in_chan = x_train_tensor.shape[-1]
-    else:
-        in_chan = None
 
     model = torch.nn.Sequential()
     
