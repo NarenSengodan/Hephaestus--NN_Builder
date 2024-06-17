@@ -1,6 +1,9 @@
 import torch
 from CNN import create_cnn
 
+def import_dataset():
+    pass
+
 def main():
 
     layer_type = input("Enter layer type: ")
@@ -27,7 +30,7 @@ def CNN_main():
 
 def model_save():
     file_path = input("Enter file path:")
-    torch.save(model, file_path)
+    torch.save(model.state_dict(), file_path)
     print("Model saved")
     
 if __name__ == "__main__":
