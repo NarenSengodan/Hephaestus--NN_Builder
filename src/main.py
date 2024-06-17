@@ -5,12 +5,9 @@ def main():
 
     layer_type = input("Enter layer type: ")
 
-    if layer_type.lower().split() == "cnn":
+    if layer_type.lower() == "cnn":
         model = CNN_main()
         print(model)
-
-        
-        
 
 def CNN_main():
 
@@ -29,10 +26,3 @@ def CNN_main():
     
 if __name__ == "__main__":
     main()
-    
-
-
-
-
-
-
