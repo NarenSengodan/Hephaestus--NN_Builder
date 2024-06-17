@@ -10,22 +10,12 @@ def import_dataset():
     x_train, y_train = tfds.as_numpy(dataset['train'])
     x_test, y_test = tfds.as_numpy(dataset['test'])
 
-    x_train_tensor = torch.tensor(x_train)
-    y_train_tensor = torch.tensor(y_train)
-    x_test_tensor = torch.tensor(x_test)
-    y_test_tensor = torch.tensor(y_test)
+    x_train_tensor = torch.tensor(x_train, dtype=torch.float32)
+    y_train_tensor = torch.tensor(y_train, dtype=torch.long)
+    x_test_tensor = torch.tensor(x_test, dtype=torch.float32)
+    y_test_tensor = torch.tensor(y_test, dtype=torch.long)
 
     return x_train_tensor, y_train_tensor, x_test_tensor, y_test_tensor, x_train, y_train
-
-def main():
-
-
-    layer_type = input("Enter layer type: ")
-
-    if layer_type.lower() == "cnn":
-        model = CNN_main()
-        print(model)
-        return model
 
 def CNN_main():
 
@@ -70,12 +60,21 @@ def model_save():
     file_path = input("Enter file path:")
     torch.save(model.state_dict(), file_path)
     print("Model saved")
-    
-if __name__ == "__main__":
-    model = main()
 
+def main():
+    layer_type = input("Enter layer type: ")
+
+    if layer_type.lower() == "cnn":
+        model = CNN_main()
+        print(model)
+        return model
     save_prompt = input("Do you want to save the model? (y/n): ")
     if save_prompt.lower() == "y":
         model_save()
     else:
         pass
+    
+if __name__ == "__main__":
+    model = main()
+
+
