@@ -39,6 +39,14 @@ def CNN_main():
 
     return model
 
+def train_model(model,x_train,x_test):
+
+    training_loader = torch.utils.data.DataLoader(x_train, batch_size=32, shuffle=True)
+    evaluation_loader = torch.utils.data.DataLoader(x_test, batch_size=32, shuffle=False)
+
+    return training_loader, evaluation_loader
+    
+
 def model_save():
     file_path = input("Enter file path:")
     torch.save(model.state_dict(), file_path)
