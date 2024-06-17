@@ -4,32 +4,39 @@ from CNN import create_cnn
 
 def import_dataset():
 
-    dataset_option = input("Which dataset do you want to import\n(Note: Tensorflow Datasets only) ")
-    dataset = tfds.load(dataset_option, with_info=True, as_supervised=True)
+    dataset_option = input("Which dataset do you want to import\n(Note: Tensorflow Datasets only)\n")
+    dataset, info = tfds.load(dataset_option, with_info=True, as_supervised=True)
 
-    x_train, y_train = tfds.as_numpy(dataset['train'])
-    x_test, y_test = tfds.as_numpy(dataset['test'])
+    x_train, x_test = dataset["train"], dataset["test"]
+    return x_train, x_test
+
+'''   train_dataset, test_dataset = tfds.as_numpy(dataset['train']), tfds.as_numpy(dataset['test'])
+
+    x_train, y_train = train_dataset['features'], train_dataset['labels']   
+    x_test, y_test = test_dataset['features'], test_dataset['labels']
+
 
     x_train_tensor = torch.tensor(x_train, dtype=torch.float32)
-    y_train_tensor = torch.tensor(y_train, dtype=torch.long)
-    x_test_tensor = torch.tensor(x_test, dtype=torch.float32)
+    x_test_tensor = torch.tensor(x_test, dtype=torch.long)
+    y_train_tensor = torch.tensor(y_train, dtype=torch.float32)
     y_test_tensor = torch.tensor(y_test, dtype=torch.long)
 
-    return x_train_tensor, y_train_tensor, x_test_tensor, y_test_tensor, x_train, y_train
+
+    return x_train_tensor, x_test_tensor, y_train_tensor, y_test_tensor, x_train, x_test, y_train, y_test'''
 
 def CNN_main():
 
-    x_train_tensor, y_train_tensor, x_test_tensor, y_test_tensor, x_train, y_train = import_dataset()
+    x_train_tensor, x_test_tensor, x_train, x_test = import_dataset()
 
     input_prompt = input("Do you want to obtain input size from dataset? (y/n): ")
     if input_prompt.lower() == "y":
-        input_size = x_train.shape[0]
+        input_size = x_train.shape[1:]
     else:
         input_size = None
 
     in_chan_prompt = input("Do you want to obtain number of in channels from dataset? (y/n): ")
     if in_chan_prompt.lower() == "y":
-        in_chan = x_train_tensor.shape[1]
+        in_chan = x_train_tensor.shape[-1]
     else:
         in_chan = None
 
@@ -62,7 +69,8 @@ def model_save():
     print("Model saved")
 
 def main():
-    layer_type = input("Enter layer type: ")
+    print("Welcome to Hephaestus ")
+    layer_type = input("Enter layer type:\n")
 
     if layer_type.lower() == "cnn":
         model = CNN_main()
@@ -76,5 +84,3 @@ def main():
     
 if __name__ == "__main__":
     model = main()
-
-
