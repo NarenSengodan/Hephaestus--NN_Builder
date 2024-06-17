@@ -15,17 +15,10 @@ def import_dataset():
     x_test_tensor = torch.tensor(x_test)
     y_test_tensor = torch.tensor(y_test)
 
-    input_prompt = input("Do you want to obtain input size from dataset? (y/n): ")
-    if input_prompt.lower() == "y":
-        input_size = x_train[0]
-    else:
-        None
-
-    return x_train_tensor, y_train_tensor, x_test_tensor, y_test_tensor, input_size
+    return x_train_tensor, y_train_tensor, x_test_tensor, y_test_tensor, x_train, y_train
 
 def main():
 
-    x_train_tensor, y_train_tensor, x_test_tensor, y_test_tensor, input_size = import_dataset()
 
     layer_type = input("Enter layer type: ")
 
@@ -34,7 +27,21 @@ def main():
         print(model)
         return model
 
-def CNN_main(input_size):
+def CNN_main():
+
+    x_train_tensor, y_train_tensor, x_test_tensor, y_test_tensor, x_train, y_train = import_dataset()
+
+    input_prompt = input("Do you want to obtain input size from dataset? (y/n): ")
+    if input_prompt.lower() == "y":
+        input_size = x_train.shape[0]
+    else:
+        input_size = None
+
+    in_chan_prompt = input("Do you want to obtain number of in channels from dataset? (y/n): ")
+    if in_chan_prompt.lower() == "y":
+        in_chan = x_train_tensor.shape[1]
+    else:
+        in_chan = None
 
     model = torch.nn.Sequential()
     
@@ -44,7 +51,12 @@ def CNN_main(input_size):
         input_size = int(input("Enter input size: "))
 
     num_layers_cnn = int(input("Enter number of layers in CNN: "))
-    in_chan = int(input("Enter number of input channels: "))
+
+    if in_chan:
+        pass
+    else:
+        in_chan = int(input("Enter number of input channels: "))
+        
     out_chan = int(input("Enter number of output channels: "))
     ks = int(input("Enter kernel size: "))
     stride_ = int(input("Enter stride: "))
