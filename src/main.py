@@ -5,7 +5,7 @@ from CNN import create_cnn
 def import_dataset():
 
     dataset_option = input("Which dataset do you want to import\n(Note: Tensorflow Datasets only) ")
-    dataset, info = tfds.load(dataset_option, with_info=True, as_supervised=True)
+    dataset = tfds.load(dataset_option, with_info=True, as_supervised=True)
 
     x_train, y_train = tfds.as_numpy(dataset['train'])
     x_test, y_test = tfds.as_numpy(dataset['test'])
@@ -56,7 +56,7 @@ def CNN_main():
         pass
     else:
         in_chan = int(input("Enter number of input channels: "))
-        
+
     out_chan = int(input("Enter number of output channels: "))
     ks = int(input("Enter kernel size: "))
     stride_ = int(input("Enter stride: "))

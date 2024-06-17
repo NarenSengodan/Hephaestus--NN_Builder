@@ -10,7 +10,7 @@ def create_cnn(model,input_size,num_layers_cnn,in_chan, out_chan, ks, stride_, p
         model.append(torch.nn.Conv2d(in_channels=out_chan, out_channels=out_chan, kernel_size=ks, stride=stride_, padding=padding_))
         model.append(torch.nn.ReLU())
 
-    Pool_layer_inp = input("\n1.MaxPool2d\n2.AvgPool2d\n3.AdaptiveAvgPool2d\nEnter your choice for pooling layer:\n")
+    Pool_layer_inp = input("\n1.MaxPool2d\n2.AvgPool2d\n3.AdaptiveAvgPool2d\n\nEnter your choice for pooling layer:\n")
 
     if Pool_layer_inp == 1:
         model.append(torch.nn.MaxPool2d(kernel_size=ks, stride=None, padding=padding_))
