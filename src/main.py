@@ -8,6 +8,7 @@ def main():
     if layer_type.lower() == "cnn":
         model = CNN_main()
         print(model)
+        return model
 
 def CNN_main():
 
@@ -23,6 +24,17 @@ def CNN_main():
     model = create_cnn(model,input_size,num_layers_cnn,in_chan, out_chan, ks, stride_, padding_)
 
     return model
+
+def model_save():
+    file_path = input("Enter file path:")
+    torch.save(model, file_path)
+    print("Model saved")
     
 if __name__ == "__main__":
-    main()
+    model = main()
+
+    save_prompt = input("Do you want to save the model? (y/n): ")
+    if save_prompt.lower() == "y":
+        model_save()
+    else:
+        pass
