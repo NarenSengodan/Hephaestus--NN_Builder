@@ -10,27 +10,13 @@ def import_dataset():
     x_train, x_test = dataset["train"], dataset["test"]
     return x_train, x_test
 
-'''   train_dataset, test_dataset = tfds.as_numpy(dataset['train']), tfds.as_numpy(dataset['test'])
-
-    x_train, y_train = train_dataset['features'], train_dataset['labels']   
-    x_test, y_test = test_dataset['features'], test_dataset['labels']
-
-
-    x_train_tensor = torch.tensor(x_train, dtype=torch.float32)
-    x_test_tensor = torch.tensor(x_test, dtype=torch.long)
-    y_train_tensor = torch.tensor(y_train, dtype=torch.float32)
-    y_test_tensor = torch.tensor(y_test, dtype=torch.long)
-
-
-    return x_train_tensor, x_test_tensor, y_train_tensor, y_test_tensor, x_train, x_test, y_train, y_test'''
-
 def CNN_main():
 
     x_train, x_test = import_dataset()
-
+    in_chan = None
     input_prompt = input("Do you want to obtain input size from dataset? (y/n): ")
     if input_prompt.lower() == "y":
-        input_size = x_train.shape[1:]
+        input_size = x_train.element_spec.shape[1:]
     else:
         input_size = None
 
@@ -43,11 +29,7 @@ def CNN_main():
 
     num_layers_cnn = int(input("Enter number of layers in CNN: "))
 
-    if in_chan:
-        pass
-    else:
-        in_chan = int(input("Enter number of input channels: "))
-
+    in_chan = int(input("Enter number of input channels: "))
     out_chan = int(input("Enter number of output channels: "))
     ks = int(input("Enter kernel size: "))
     stride_ = int(input("Enter stride: "))
@@ -63,6 +45,8 @@ def model_save():
     print("Model saved")
 
 def main():
+
+    
     print("Welcome to Hephaestus ")
     layer_type = input("Enter layer type:\n")
 
@@ -70,6 +54,11 @@ def main():
         model = CNN_main()
         print(model)
         return model
+    
+    adam = torch.optimizers.Adam
+    loss = torch.nn.CrossEntropyLoss
+    metrics = ["accuracy"]
+  
     save_prompt = input("Do you want to save the model? (y/n): ")
     if save_prompt.lower() == "y":
         model_save()
