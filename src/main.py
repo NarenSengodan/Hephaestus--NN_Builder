@@ -89,19 +89,19 @@ def main():
     x_train, x_test = import_dataset()
     print("Welcome to Hephaestus ")
     layer_type = input("Enter layer type:\n")
+    train_prompt = input("Do you want to train the model? (y/n): ")
+    save_prompt = input("Do you want to save the model? (y/n): ")
 
     if layer_type.lower() == "cnn":
         model = CNN_main(x_train, x_test)
         print(model)
         return model
     
-    train_prompt = input("Do you want to train the model? (y/n): ")
     if train_prompt.lower() == "y":
         train_model(model,x_train,x_test)
     else:
         pass
     
-    save_prompt = input("Do you want to save the model? (y/n): ")
     if save_prompt.lower() == "y":
         model_save()
     else:
