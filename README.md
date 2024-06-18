@@ -21,7 +21,7 @@ Hephaestus CNN Model Builder is a Python script that allows users to build and t
 1. **Clone the Repository**: Clone the repository to your local machine.
    ```bash
    git clone https://github.com/NarenSengodan/hephaestus.cnn.git
-   cd hephaestus-cnn-model-builder
+   cd hephaestus.cnn
 Install Dependencies: Install the required Python libraries.
 
 
