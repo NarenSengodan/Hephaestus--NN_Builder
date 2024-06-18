@@ -96,15 +96,18 @@ def main():
         model = CNN_main(x_train, x_test)
         print(model)
         
-    if train_prompt.lower() == "y":
-        train_model(model,x_train,x_test)
-    else:
-        pass
+        if train_prompt.lower() == "y":
+            train_model(model,x_train,x_test)
+            print("Model trained")
+        else:
+            print("Model not trained")
     
-    if save_prompt.lower() == "y":
-        model_save()
-    else:
-        pass
+        if save_prompt.lower() == "y":
+            model_save()
+            print("Model saved")
+        else:
+            print("Model not saved")
+            pass
     
 if __name__ == "__main__":
     model = main()
