@@ -45,7 +45,7 @@ def train_model(model,x_train,x_test):
     evaluation_loader = torch.utils.data.DataLoader(x_test, batch_size=32, shuffle=False)
 
     loss = torch.nn.CrossEntropyLoss()
-    optimizer = torch.optim.Adam(model.parameters(),learning_rate=0.001) 
+    optimizer = torch.optim.Adam(model.parameters(),lr=0.01) 
 
     num_epochs = int(input("Number of epochs: "))  
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu" )
@@ -54,10 +54,10 @@ def train_model(model,x_train,x_test):
     for epoch in range(num_epochs):
         model.train()
         running_loss = 0.0
-        for i,(input, labels) in enumerate(training_loader):
-            input, labels = input.to(device), labels.to(device)
+        for i,(input_, labels) in enumerate(training_loader):
+            input_, labels = input_.to(device), labels.to(device)
             optimizer.zero_grad()
-            output = model(input)
+            output = model(input_)
             loss_value = loss(output, labels)
             loss_value.backward()
             optimizer.step()
@@ -70,9 +70,9 @@ def train_model(model,x_train,x_test):
         correct = 0
         total = 0
         with torch.no_grad():
-            for (input, labels) in evaluation_loader:
-                input, labels = input.to(device), labels.to(device)
-                output = model(input)
+            for (input_, labels) in evaluation_loader:
+                input_, labels = input_.to(device), labels.to(device)
+                output = model(input_)
                 _, predicted = torch.max(output.data, 1)
                 total += labels.size(0)
                 correct += (predicted == labels).sum().item()
