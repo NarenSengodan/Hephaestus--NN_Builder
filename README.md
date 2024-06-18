@@ -62,9 +62,6 @@ Enter file path: models/mnist_cnn_model.pth
 Contributing
 Contributions are welcome! Please open an issue or submit a pull request for any changes or improvements.
 
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 Acknowledgments
 Built with PyTorch and TensorFlow Datasets.
 Inspired by the need for a flexible CNN model builder with TensorFlow dataset integration.
