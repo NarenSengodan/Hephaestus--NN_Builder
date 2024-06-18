@@ -10,9 +10,9 @@ def import_dataset():
     x_train, x_test = dataset["train"], dataset["test"]
     return x_train, x_test
 
-def CNN_main():
+def CNN_main(x_train, x_test):
 
-    x_train, x_test = import_dataset()
+    
     in_chan = None
     input_prompt = input("Do you want to obtain input size from dataset? (y/n): ")
     if input_prompt.lower() == "y":
@@ -45,9 +45,40 @@ def train_model(model,x_train,x_test):
     evaluation_loader = torch.utils.data.DataLoader(x_test, batch_size=32, shuffle=False)
 
     loss = torch.nn.CrossEntropyLoss()
+    optimizer = torch.optim.Adam(model.parameters(),learning_rate=0.001) 
 
-    
+    num_epochs = int(input("Number of epochs: "))  
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu" )
+    model.to(device) 
 
+    for epoch in range(num_epochs):
+        model.train()
+        running_loss = 0.0
+        for i,(input, labels) in enumerate(training_loader):
+            input, labels = input.to(device), labels.to(device)
+            optimizer.zero_grad()
+            output = model(input)
+            loss_value = loss(output, labels)
+            loss_value.backward()
+            optimizer.step()
+            running_loss += loss_value.item()
+            if i % 100 == 99:
+                print(f"Epoch: {epoch+1}, Loss: {running_loss/100}")
+                running_loss = 0.0
+
+        model.eval()
+        correct = 0
+        total = 0
+        with torch.no_grad():
+            for (input, labels) in evaluation_loader:
+                input, labels = input.to(device), labels.to(device)
+                output = model(input)
+                _, predicted = torch.max(output.data, 1)
+                total += labels.size(0)
+                correct += (predicted == labels).sum().item()
+                accuracy = 100 * correct / total
+        print(f"Epoch: {epoch+1}, Accuracy: {correct/total}")
+        
 def model_save():
     file_path = input("Enter file path:")
     torch.save(model.state_dict(), file_path)
@@ -55,7 +86,7 @@ def model_save():
 
 def main():
 
-    
+    x_train, x_test = import_dataset()
     print("Welcome to Hephaestus ")
     layer_type = input("Enter layer type:\n")
 
@@ -63,6 +94,12 @@ def main():
         model = CNN_main()
         print(model)
         return model
+    
+    train_prompt = input("Do you want to train the model? (y/n): ")
+    if train_prompt.lower() == "y":
+        train_model(model,x_train,x_test)
+    else:
+        pass
     
     save_prompt = input("Do you want to save the model? (y/n): ")
     if save_prompt.lower() == "y":
