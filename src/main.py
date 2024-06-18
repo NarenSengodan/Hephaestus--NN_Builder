@@ -78,7 +78,7 @@ def train_model(model,x_train,x_test):
                 correct += (predicted == labels).sum().item()
                 accuracy = 100 * correct / total
         print(f"Epoch: {epoch+1}, Accuracy: {correct/total}")
-        
+
 def model_save():
     file_path = input("Enter file path:")
     torch.save(model.state_dict(), file_path)
@@ -91,7 +91,7 @@ def main():
     layer_type = input("Enter layer type:\n")
 
     if layer_type.lower() == "cnn":
-        model = CNN_main()
+        model = CNN_main(x_train, x_test)
         print(model)
         return model
     
