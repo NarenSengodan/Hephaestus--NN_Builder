@@ -16,7 +16,7 @@ def CNN_main():
     in_chan = None
     input_prompt = input("Do you want to obtain input size from dataset? (y/n): ")
     if input_prompt.lower() == "y":
-        input_size = x_train.element_spec.shape[1:]
+        input_size = x_train.element_spec[0].shape[1:]
     else:
         input_size = None
 
@@ -44,7 +44,8 @@ def train_model(model,x_train,x_test):
     training_loader = torch.utils.data.DataLoader(x_train, batch_size=32, shuffle=True)
     evaluation_loader = torch.utils.data.DataLoader(x_test, batch_size=32, shuffle=False)
 
-    return training_loader, evaluation_loader
+    loss = torch.nn.CrossEntropyLoss()
+
     
 
 def model_save():
@@ -63,10 +64,6 @@ def main():
         print(model)
         return model
     
-    adam = torch.optimizers.Adam
-    loss = torch.nn.CrossEntropyLoss
-    metrics = ["accuracy"]
-  
     save_prompt = input("Do you want to save the model? (y/n): ")
     if save_prompt.lower() == "y":
         model_save()
