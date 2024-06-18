@@ -95,8 +95,7 @@ def main():
     if layer_type.lower() == "cnn":
         model = CNN_main(x_train, x_test)
         print(model)
-        return model
-    
+        
     if train_prompt.lower() == "y":
         train_model(model,x_train,x_test)
     else:
