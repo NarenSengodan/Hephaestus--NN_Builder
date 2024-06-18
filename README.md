@@ -25,11 +25,11 @@ Hephaestus CNN Model Builder is a Python script that allows users to build and t
 Install Dependencies: Install the required Python libraries.
 
 
-pip install torch tensorflow-datasets
+`pip install torch tensorflow-datasets`
 Run the Script: Execute the main Python script to build and train your CNN model.
 
 
-python main.py
+`python main.py`
 Follow the Prompts:
 
 Choose the dataset from TensorFlow Datasets that you want to use.
