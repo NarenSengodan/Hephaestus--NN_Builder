@@ -38,11 +38,13 @@ Optionally train the model by specifying the number of epochs.
 Optionally save the trained model to a specified file path.
 Monitor Training: During training, the script will display loss values and accuracy metrics for each epoch.
 
-Example
-Here's an example workflow:
+## Example Usage
 
+Here's an example of how to use the Hephaestus CNN Model Builder script:
+
+```bash
 Which dataset do you want to import
-(Note: Tensorflow Datasets only)
+(Note: TensorFlow Datasets only)
 mnist
 Do you want to obtain input size from dataset? (y/n): y
 Enter number of layers in CNN: 2
@@ -55,6 +57,8 @@ Number of epochs: 10
 Do you want to train the model? (y/n): y
 Do you want to save the model? (y/n): y
 Enter file path: models/mnist_cnn_model.pth
+
+
 Contributing
 Contributions are welcome! Please open an issue or submit a pull request for any changes or improvements.
 
