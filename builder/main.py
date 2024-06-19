@@ -79,7 +79,7 @@ def train_model(model,x_train,x_test):
                 accuracy = 100 * correct / total
         print(f"Epoch: {epoch+1}, Accuracy: {correct/total}")
 
-def model_save():
+def model_save(model):
     file_path = input("Enter file path:")
     torch.save(model.state_dict(), file_path)
     print("Model saved")
@@ -97,7 +97,7 @@ def main():
     print(model)
 
     if save_prompt.lower() == "y":
-        model_save()
+        model_save(model)
         print("Model saved")
     else:
         print("Model not saved")
