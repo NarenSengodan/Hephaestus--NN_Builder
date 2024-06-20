@@ -35,7 +35,7 @@ def CNN_main(x_train, x_test):
     stride_ = int(input("Enter stride: "))
     padding_ = int(input("Enter padding: "))
 
-    model = create_cnn(model,input_size,num_layers_cnn,in_chan, out_chan, ks, stride_, padding_)
+    model = create_cnn(model,input_size[0],num_layers_cnn,input_size[1], out_chan, ks, stride_, padding_)
 
     return model
 
