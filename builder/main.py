@@ -14,9 +14,11 @@ def CNN_main(x_train, x_test):
 
     
     in_chan = None
-    input_prompt = input("Do you want to obtain input size from dataset? (y/n): ")
+    input_prompt = input("Do you want to obtain input size and in channels from dataset? (y/n): ")
     if input_prompt.lower() == "y":
-        input_size = x_train.element_spec[0].shape[1:]
+        input_size = (x_train.element_spec[0].shape[1:])
+        print(input_size[0])
+        
     else:
         input_size = None
 
@@ -26,10 +28,8 @@ def CNN_main(x_train, x_test):
         pass
     else:
         input_size = int(input("Enter input size: "))
-
+        in_chan = int(input("Enter number of input channels: "))
     num_layers_cnn = int(input("Enter number of layers in CNN: "))
-
-    in_chan = int(input("Enter number of input channels: "))
     out_chan = int(input("Enter number of output channels: "))
     ks = int(input("Enter kernel size: "))
     stride_ = int(input("Enter stride: "))
