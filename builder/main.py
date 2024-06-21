@@ -17,7 +17,7 @@ def CNN_main(x_train, x_test):
     input_prompt = input("Do you want to obtain input size and in channels from dataset? (y/n): ")
     if input_prompt.lower() == "y":
         input_size = (x_train.element_spec[0].shape[1:])
-        print(input_size[0])
+        print(input_size)
         
     else:
         input_size = None
@@ -33,7 +33,12 @@ def CNN_main(x_train, x_test):
     out_chan = int(input("Enter number of output channels: "))
     ks = int(input("Enter kernel size: "))
     stride_ = int(input("Enter stride: "))
-    padding_ = int(input("Enter padding: "))
+    padding_ = int(input("Enter padding:\n1.True\n2.False\n"))
+
+    if padding_ == 1:
+        padding_ = True
+    else:
+        padding_ = False
 
     model = create_cnn(model,input_size[0],num_layers_cnn,input_size[1], out_chan, ks, stride_, padding_)
 
@@ -76,40 +81,39 @@ def train_model(model,x_train,x_test):
                 _, predicted = torch.max(output.data, 1)
                 total += labels.size(0)
                 correct += (predicted == labels).sum().item()
-                accuracy = 100 * correct / total
         print(f"Epoch: {epoch+1}, Accuracy: {correct/total}")
 
 def model_save(model):
     file_path = input("Enter file path:")
     torch.save(model.state_dict(), file_path)
-    print("Model saved")
+    
 
 def main():
 
     x_train, x_test = import_dataset()
-    print("Welcome to Hephaestus ")
     
-    train_prompt = input("Do you want to train the model? (y/n): ")
-    save_prompt = input("Do you want to save the model? (y/n): ")
-
+    print("HEPHAESTUS!!")
     
     model = CNN_main(x_train, x_test)
     print(model)
 
+    save_prompt = input("Do you want to save the model? (y/n): ")
+    
     if save_prompt.lower() == "y":
         model_save(model)
         print("Model saved")
     else:
         print("Model not saved")
         pass
-        
+
+    train_prompt = input("Do you want to train the model? (y/n): ")    
+
     if train_prompt.lower() == "y":
         train_model(model,x_train,x_test)
         print("Model trained")
     else:
         print("Model not trained")
     
-
     
 if __name__ == "__main__":
-    model = main()
+    main()
