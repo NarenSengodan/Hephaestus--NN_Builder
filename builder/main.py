@@ -50,18 +50,21 @@ def CNN_main(x_train, x_test, num_classes):
     # Add a flatten layer before the fully connected layers
     model.add_module("flatten", torch.nn.Flatten())
 
-    # Adding fully connected layer after flattening
-    fc_input_size = calculate_flattened_size(input_size, in_chan, num_layers_cnn, ks, stride_, padding_)
+    # Calculating the output size after convolutional layers
+    conv_output_size = calculate_conv_output_size(input_size, num_layers_cnn, ks, stride_, padding_)
+    fc_input_size = conv_output_size * conv_output_size * in_chan
+
+    # Adding fully connected layers
     model.add_module("fc", torch.nn.Linear(fc_input_size, 128))
     model.add_module("output", torch.nn.Linear(128, out_chan))
 
     return model
 
-def calculate_flattened_size(input_size, in_chan, num_layers_cnn, ks, stride_, padding_):
+def calculate_conv_output_size(input_size, num_layers_cnn, ks, stride_, padding_):
     size = input_size
     for _ in range(num_layers_cnn):
         size = (size - ks + 2 * padding_) // stride_ + 1
-    return size * size * in_chan
+    return size
 
 def train_model(model, x_train, x_test):
     x_train = tfds_to_torch(x_train)
