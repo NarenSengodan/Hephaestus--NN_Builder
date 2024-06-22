@@ -1,3 +1,4 @@
+```markdown
 # Hephaestus CNN Model Builder
 
 Hephaestus CNN Model Builder is a Python script that allows users to build and train Convolutional Neural Network (CNN) models using PyTorch with TensorFlow Datasets.
@@ -22,21 +23,24 @@ Hephaestus CNN Model Builder is a Python script that allows users to build and t
    ```bash
    git clone https://github.com/NarenSengodan/hephaestus.cnn.git
    cd hephaestus.cnn
-Install Dependencies: Install the required Python libraries.
+   ```
 
+2. **Install Dependencies**: Install the required Python libraries.
+   ```bash
+   pip install torch tensorflow-datasets
+   ```
 
-`pip install torch tensorflow-datasets`
-Run the Script: Execute the main Python script to build and train your CNN model.
+3. **Run the Script**: Execute the main Python script to build and train your CNN model.
+   ```bash
+   python main.py
+   ```
 
-
-`python main.py`
-Follow the Prompts:
-
-Choose the dataset from TensorFlow Datasets that you want to use.
-Specify the CNN architecture by entering the number of layers, input and output channel numbers, kernel size, stride, and padding.
-Optionally train the model by specifying the number of epochs.
-Optionally save the trained model to a specified file path.
-Monitor Training: During training, the script will display loss values and accuracy metrics for each epoch.
+4. **Follow the Prompts**:
+   - Choose the dataset from TensorFlow Datasets that you want to use.
+   - Specify the CNN architecture by entering the number of layers, input and output channel numbers, kernel size, stride, and padding.
+   - Optionally train the model by specifying the number of epochs.
+   - Optionally save the trained model to a specified file path.
+   - Monitor Training: During training, the script will display loss values and accuracy metrics for each epoch.
 
 ## Example Usage
 
@@ -57,11 +61,14 @@ Number of epochs: 10
 Do you want to train the model? (y/n): y
 Do you want to save the model? (y/n): y
 Enter file path: models/mnist_cnn_model.pth
+```
 
+## Contributing
 
-Contributing
 Contributions are welcome! Please open an issue or submit a pull request for any changes or improvements.
 
-Acknowledgments
-Built with PyTorch and TensorFlow Datasets.
-Inspired by the need for a flexible CNN model builder with TensorFlow dataset integration.
+## Acknowledgments
+
+- Built with PyTorch and TensorFlow Datasets.
+- Inspired by the need for a flexible CNN model builder with TensorFlow dataset integration.
+```
