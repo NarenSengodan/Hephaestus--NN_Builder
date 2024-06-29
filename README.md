@@ -12,7 +12,7 @@ Hephaestus CNN Model Builder is a Python script that allows users to build and t
 
 ## Requirements
 
-- Python 3.x
+- Python
 - PyTorch
 - TensorFlow Datasets (tfds)
 - GPU (optional, for faster training)
