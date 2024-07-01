@@ -2,7 +2,7 @@
 # Hephaestus CNN Model Builder
 
 Hephaestus CNN Model Builder is a Python script that allows users to build and train Convolutional Neural Network (CNN) models using PyTorch with TensorFlow Datasets.
-The Goal of this project is just to show how other library datasets are amenable for models with foreign architecture or library
+The Goal of this project is just to show how other library datasets are amenable for models with foreign architectures
 ## Features
 
 - **Dataset Import**: Imports datasets from TensorFlow Datasets (TFDS) for training and testing.
